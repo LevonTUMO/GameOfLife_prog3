@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game of Life</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <h1 class="glitch">
+        <span aria-hidden="true">Game of life</span>
+        Game of life
+        <span aria-hidden="true"> Game of life</span>
+      </h1>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
+    <!-- <script src="./matrix.js"></script> -->
+    <script src="./fireEx.js"></script>
+    <script src="./Grass.js"></script>
+    <script src="./fire.js"></script>
+    <script src="./grassEater.js"></script>
+    <script src="./grassEaterEater.js"></script>
+   <script src="./script.js"></script>
+
+   <table>
+<tr>
+    <td><button id = "stop" class = "stop" onclick="stop()">Stop</button></td>
+    <td><button id = "restart" class = "restart" onclick="restart()">Restart</button></td>
+    <td><button id = "button" class="button" onclick="herb()">herbivorous</button></td>
+    <td><button id = "button2" class="button2" onclick="pred()">predator</button></td>
+    <td><button id = "buttongrass" class="buttongrass" onclick="grass()">Grass</button></td>
+    <td><button id = "buttonfire" class = "buttonfire" onclick="createFire()">Fire</button></td>
+    <td><button id = "fireЕxtinguisher" class = "fireЕxtinguisher" onclick="fireЕxtinguisher()">fire extinguisher</button></td>
+    <td><button id = "kill" class = "kill" onclick="setkill()">destroy everything</button></td>
+
+    <td><button id = "killhalf" class = "killhalf" onclick="killFire()">put out the fire</button></td>
+</tr>
+
+   </table>
+
+   <button id = "start" class = start onclick="start(true)">Start</button>
+
+  
+
+
+
+
+
+
+
+
+
+
+<!--<button id = "download" class = "download" onclick="Downloadall()">save</button>-->
+  
+
+
+  
+
+<script> 
+    const urlParams = new URLSearchParams(window.location.search);
+    const action = urlParams.get('action')
+    // alert(action)
+    if (action == "restart") {
+        
+        start(false);
+    }else if(action == "killall"){
+        kill();
+    }
+    </script>
+  
+   <!--<script>
+   
+   
+   function addbuttons(clasS,functioN,value){
+
+
+    var btn = document.createElement('input');
+    btn.setAttribute('type' , 'button');
+    btn.setAttribute('class' , clasS);
+    btn.setAttribute("value" , value);
+    btn.setAttribute('onclick' , functioN);
+    document.body.appendChild(btn);
+    // btn.addEventListener('click','restart',false);
+
+ 
+
+// var stop = '<button class = "stop" onclick="stop()">Stop</button>'
+// var restart = '<button class = "restart" onclick="restart()">Restart</button>'
+// var button = '<button class="button" onclick="generatorEat(15,2,size,GrassEater,grassEatArr)">GrassEater</button>'
+// var button2 = '<button class="button2" onclick="generatorEat(5,4,size,GrassEaterEater,grassEatEatArr)">GrassEaterEater</button>'
+// var buttongrass = '<button class="buttongrass" onclick="generatorEat(100,1,size,Grass,grassArr)">Grass</button>'
+// var buttonfire = '<button class = "buttonfire" onclick="generatorEat(10,3,size,Fire,fireArr)">Fire</button>'
+// var kill = '<button class = "kill" onclick="killall()">kill All</button>'
+// var killhalf = '<button class = "killhalf" onclick="killFire()">kill Fire</button>'
+
+// // document.write(stop)
+// // document.write(restart)
+// // document.write(button)
+// // document.write(button2)
+// // document.write(buttongrass)
+// // document.write(buttonfire)
+// // document.write(kill)
+// // document.write(killhalf)
+
+
+    }
+</script>-->
+
+
+<button class = "info" onclick="window.location.replace('./info.html')">Creators Info</button>
+</body>
+</html>
