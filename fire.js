@@ -2,9 +2,9 @@ class Fire {
     constructor(x, y){
         this.x = x;
         this.y = y;
-        this.energy = 10;
+        this.energy = 5;
         this.directions = [];
-        this.mulEnergy = 100;
+        this.mulEnergy = 120;
         this.defEnergy = 5;
         this.dieEnergy = 50;
         this.play = 0

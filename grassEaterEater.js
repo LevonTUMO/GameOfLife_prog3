@@ -2,9 +2,9 @@ class GrassEaterEater {
     constructor(x, y){
         this.x = x;
         this.y = y;
-        this.energy = 50;
+        this.energy = 60;
         this.directions = [];
-        this.mulEnergy = 70;
+        this.mulEnergy = 75;
         this.defEnergy = 5;
         this.dieEnergy = 0;
     }

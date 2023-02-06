@@ -238,13 +238,13 @@ setTimeout(() => {generator(size)}, 500);
 	
 
 	setTimeout(() => {generatorEat(600,1,size,Grass,grassArr)}, 1000);
-	setTimeout(() => {generatorEat(50,2,size,GrassEater,grassEatArr)}, 2000);
+	setTimeout(() => {generatorEat(50,2,size,GrassEater,grassEatArr)}, 3000);
 	
-	setTimeout(() => {generatorEat(25,4,size,GrassEaterEater,grassEatEatArr)}, 9000);
+	setTimeout(() => {generatorEat(25,4,size,GrassEaterEater,grassEatEatArr)}, 20000);
 
 
-	setTimeout(() => {generatorEat(10,3,size,Fire,fireArr)}, 14000);
-	setTimeout(() => {generatorEat(60,5,size,fireEx,fireExArr)}, 40000);
+	setTimeout(() => {generatorEat(10,3,size,Fire,fireArr)}, 30000);
+	setTimeout(() => {generatorEat(60,5,size,fireEx,fireExArr)}, 50000);
 
 	/*setTimeout(() => {
 		killFire()
