@@ -246,6 +246,10 @@ setTimeout(() => {generator(size)}, 500);
 	setTimeout(() => {generatorEat(10,3,size,Fire,fireArr)}, 30000);
 	setTimeout(() => {generatorEat(60,5,size,fireEx,fireExArr)}, 50000);
 
+	setTimeout(() => {generatorEat(25,4,size,GrassEaterEater,grassEatEatArr)}, 60000);
+
+	setTimeout(() => {generatorEat(60,5,size,fireEx,fireExArr)}, 100000);
+
 	/*setTimeout(() => {
 		killFire()
 		for (let y = 0; y < matrix.length; y++) {
