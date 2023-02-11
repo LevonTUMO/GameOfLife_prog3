@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,42 +8,42 @@
     <title>Game of Life</title>
     <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
 
     <h1 class="glitch">
         <span aria-hidden="true">Game of life</span>
         Game of life
         <span aria-hidden="true"> Game of life</span>
-      </h1>
+    </h1>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
     <!-- <script src="./matrix.js"></script> -->
+    <script src="./live.js"></script>
     <script src="./fireEx.js"></script>
     <script src="./Grass.js"></script>
     <script src="./fire.js"></script>
     <script src="./grassEater.js"></script>
     <script src="./grassEaterEater.js"></script>
-   <script src="./script.js"></script>
+    <script src="./script.js"></script>
 
-   <table>
-<tr>
-    <td><button id = "stop" class = "stop" onclick="stop()">Stop</button></td>
-    <td><button id = "restart" class = "restart" onclick="restart()">Restart</button></td>
-    <td><button id = "button" class="button" onclick="herb()">herbivorous</button></td>
-    <td><button id = "button2" class="button2" onclick="pred()">predator</button></td>
-    <td><button id = "buttongrass" class="buttongrass" onclick="grass()">Grass</button></td>
-    <td><button id = "buttonfire" class = "buttonfire" onclick="createFire()">Fire</button></td>
-    <td><button id = "fireЕxtinguisher" class = "fireЕxtinguisher" onclick="fireЕxtinguisher()">fire extinguisher</button></td>
-    <td><button id = "kill" class = "kill" onclick="setkill()">destroy everything</button></td>
+    <table>
+        <tr>
+            <td><button id="stop" class="stop" onclick="stop()">Stop</button></td>
+            <td><button id="restart" class="restart" onclick="restart()">Restart</button></td>
+            <td><button id="button" class="button" onclick="herb()">herbivorous</button></td>
+            <td><button id="button2" class="button2" onclick="pred()">predator</button></td>
+            <td><button id="buttongrass" class="buttongrass" onclick="grass()">Grass</button></td>
+            <td><button id="buttonfire" class="buttonfire" onclick="createFire()">Fire</button></td>
+            <td><button id="fireЕxtinguisher" class="fireЕxtinguisher" onclick="fireЕxtinguisher()">fire
+                    extinguisher</button></td>
+            <td><button id="kill" class="kill" onclick="setkill()">destroy everything</button></td>
 
-    <td><button id = "killhalf" class = "killhalf" onclick="killFire()">put out the fire</button></td>
-</tr>
+            <td><button id="killhalf" class="killhalf" onclick="killFire()">put out the fire</button></td>
+        </tr>
 
-   </table>
+    </table>
 
-   <button id = "start" class = start onclick="start(true)">Start</button>
-
-  
-
+    <button id="start" class=start onclick="start(true)">Start</button>
 
 
 
@@ -52,25 +53,28 @@
 
 
 
-<!--<button id = "download" class = "download" onclick="Downloadall()">save</button>-->
-  
 
 
-  
 
-<script> 
-    const urlParams = new URLSearchParams(window.location.search);
-    const action = urlParams.get('action')
-    // alert(action)
-    if (action == "restart") {
-        
-        start(false);
-    }else if(action == "killall"){
-        kill();
-    }
+    <!--<button id = "download" class = "download" onclick="Downloadall()">save</button>-->
+
+
+
+
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const action = urlParams.get('action')
+        // alert(action)
+        if (action == "restart") {
+
+            start(false);
+        } else if (action == "killall") {
+            kill();
+        }
     </script>
-  
-   <!--<script>
+
+    <!--<script>
    
    
    function addbuttons(clasS,functioN,value){
@@ -109,6 +113,7 @@
 </script>-->
 
 
-<button class = "info" onclick="window.location.replace('./info.html')">Creators Info</button>
+    <button class="info" onclick="window.location.href = './info.html'">Creators Info</button>
 </body>
+
 </html>
