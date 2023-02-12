@@ -1,27 +1,10 @@
 class GrassEaterEater extends LivingCreature{
     constructor(x, y){
-        super();
-        super.x = x;
-        super.y = y;
+        super(x,y,1);
         this.energy = 60;
-        this.directions = [];
         this.mulEnergy = 75;
         this.defEnergy = 5;
-        this.dieEnergy = 0;
     }
-
-getNewCords(){
-    this.directions = [
-        [this.x - 1, this.y - 1],
-        [this.x    , this.y - 1],
-        [this.x + 1, this.y - 1],
-        [this.x - 1, this.y    ],
-        [this.x + 1, this.y    ],
-        [this.x - 1, this.y + 1],
-        [this.x    , this.y + 1],
-        [this.x + 1, this.y + 1]
-    ];
-}
 
 
 
@@ -120,22 +103,13 @@ this.y = newY
 this.energy --
 }
 if(this.energy < this.dieEnergy){
-    this.die()
+    this.die(grassEatEatArr)
 }
         
 
     }
 
-    die(){
-        for(var i  in grassEatEatArr){
-            if(this.x == grassEatEatArr[i].x && this.y ==grassEatEatArr[i].y){
-                grassEatEatArr.splice(i,1)
-                break;
-            }
-            
-                }
-                matrix[this.y][this.x] = 0
-            }
+
 
     
 
