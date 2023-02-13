@@ -1,0 +1,22 @@
+{
+  "name": "gameoflife_prog3",
+  "version": "1.0.0",
+  "description": "prog 3",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LevonTUMO/GameOfLife_prog3.git"
+  },
+  "keywords": [
+    "alert(\"message\")"
+  ],
+  "author": "Levon",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

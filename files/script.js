@@ -97,7 +97,7 @@ function killFire(){
 
 	for(let i =0;i<10;i++){
 	for (var fire in fireArr) {
-		fireArr[fire].die()
+		fireArr[fire].die(fireArr)
 	}
 	}	
 	console.log("killed fire")
