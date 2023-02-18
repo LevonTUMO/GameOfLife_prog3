@@ -2,14 +2,16 @@ var express = require("express");
 
 var app = express();
 
+app.use(express.static("files"));
+
 app.get("/", function(req, res){
 
-res.send("<!DOCTYPE html><html><body><h1>My First Heading</h1><p>My first paragraph.</p></body></html>");
+res.redirect("index.html");
 
 });
-const port = 3000;
-app.listen(port, function(){
 
-console.log("Example is running on port "+port);
+app.listen(3000, function(){
+
+console.log("Example is running on port 3000");
 
 });
