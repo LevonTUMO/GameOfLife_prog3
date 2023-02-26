@@ -5,33 +5,33 @@ const size = 50;
 
 
 function fireЕxtinguisher() {
-	var audio = new Audio('./sound/Blastwave_FX_FireExtinguisher_BW.4175.ogg');
+	var audio = new Audio('./sound/FireExtinguisher.ogg');
 	audio.play();
 	setTimeout(() => { SendReq("spawn", [10, 5]) }, 300);
 }
 
 function createFire() {
-	var audio = new Audio('./sound/feuer.ogg');
+	var audio = new Audio('./sound/fire.ogg');
 	audio.play();
 	setTimeout(() => { SendReq("spawn", [10, 3]) }, 1000);
 }
 
 function createFireMan() {
-	var audio = new Audio('./sound/feuer.ogg');
+	var audio = new Audio('./sound/FIRE-TRUCK.ogg');
 	audio.play();
 	setTimeout(() => { SendReq("spawn", [3, 6]) }, 1000);
 }
 
 
 function pred() {
-	var audio = new Audio('./sound/T-Rex Attack - QuickSounds.com.ogg');
+	var audio = new Audio('./sound/T-Rex.ogg');
 	audio.play();
 	setTimeout(() => { SendReq("spawn", [5, 4]) }, 1000);
 	setTimeout(() => { audio.pause(); }, 5000);
 }
 
 function grass() {
-	var audio = new Audio('./sound/Footsteps-in-grass-moderate-A-www.fesliyanstudios.com.ogg');
+	var audio = new Audio('./sound/grass.ogg');
 	audio.play();
 	setTimeout(() => {
 		SendReq("spawn", [100, 1])
@@ -42,26 +42,34 @@ function grass() {
 }
 
 function herb() {
-	var audio = new Audio('./sound/Indian Elephant 2 - QuickSounds.com.ogg');
+	var audio = new Audio('./sound/Elephant.ogg');
 	audio.play();
 	setTimeout(() => { SendReq("spawn", [15, 2]) }, 1000);
 }
 
 
 function restart() {
-	var audio = new Audio('./sound/cinema-drum-hit-SBA-300419703-preview.ogg');
+	var audio = new Audio('./sound/drum-hit.ogg');
 	audio.play();
-	SendReq("stop");
-	setTimeout(() => { window.location.replace("./index.html?action=restart") }, 3000);
+	setTimeout(() => {SendReq("stop")},1500);
+	// SendReq("stop")
+	// setTimeout(() => { window.location.replace("./index.html?action=restart") }, 3000);
+	// setTimeout(() => {start(false)},1500);
+	socket.on("nodeLoaded",function(){
+		window.location.replace("./index.html?action=noStart")
+	})
 }
 function stop() {
-	var audio = new Audio('./sound/cinema-drum-hit-SBA-300419703-preview.ogg');
+	var audio = new Audio('./sound/drum-hit.ogg');
 	audio.play();
-	SendReq("stop");
-	setTimeout(() => { window.location.replace("./index.html") }, 3000);
+	setTimeout(() => {SendReq("stop")},2000);
+	socket.on("nodeLoaded",function(){
+		window.location.replace("./index.html")
+	})
+	
 }
 function killFire() {
-	var audio = new Audio('./sound/Blastwave_FX_FireExtinguisher_BW.4175.ogg');
+	var audio = new Audio('./sound/FireExtinguisher.ogg');
 	audio.play();
 	SendReq("killfire")
 }
@@ -86,10 +94,17 @@ function hidebuttons(id) {
 
 function setkill() {
 
-	var audio = new Audio('./sound/cinema-drum-hit-SBA-300419703-preview.ogg');
+	var audio = new Audio('./sound/drum-hit.ogg');
 	audio.play();
-	SendReq("stop")
-	socket.on("nodeLoaded",nodeLoaded)
+	setTimeout(() => {SendReq("stop")},1500);
+	socket.on("nodeLoaded",function(){
+		SendReq("killed")
+	
+		socket.on("killedSucc",function(){
+			window.location.replace("./index.html?action=noStart")
+			
+	})
+	})
 	
 }
 
@@ -112,17 +127,14 @@ function kill() {
 	
 }
 
-function nodeLoaded(){
-	SendReq("killed")
-	setTimeout(() => { window.location.replace("./index.html?action=killall") }, 3000);
-}
 
 function start(playsound) {
 	if (playsound) {
 
-		var audio = new Audio('./sound/243020__plasterbrain__game-start.ogg');
+		var audio = new Audio('./sound/game-start.ogg');
 		audio.play();
 	}
+	// SendReq("console.log","start")
 
 	hidebuttons("start")
 	showbuttons("restart")
@@ -147,12 +159,10 @@ function SendReq(Req, data = null) {
 }
 
 
-socket.on('matrix', GetMatrix);
-
-function GetMatrix(matr) {
-	matrix = matr
+socket.on('matrix', function(data){
+	matrix = data
 		drawing();
-}
+});
 
 const side = 10;
 

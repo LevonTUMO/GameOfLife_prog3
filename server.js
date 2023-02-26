@@ -1,6 +1,6 @@
 matrix = []
-var generated =false;
-var firstReady = true;
+let generated =false;
+let firstReady = true;
 var firemanCount = 0;
 var express = require('express');
 
@@ -68,7 +68,7 @@ const GrassEaterEater = require("./files/grassEaterEater");
 
 io.on('connection', function (socket) {
   socket.emit("nodeLoaded", true);
-
+  // console.log("nodeLoaded")
   function sendMatrix() {
     socket.emit("matrix", matrix);
   }
@@ -80,8 +80,9 @@ io.on('connection', function (socket) {
     sendMatrix()
   });
   socket.on("cliReady", function (data) {
-
+    // console.log(firstReady)
     if(firstReady){
+      
       setTimeout(() => { generatorEat(600, 1, size, Grass, grassArr) }, 1000);
 
     setTimeout(() => { generatorEat(50, 2, size, GrassEater, grassEatArr) }, 3000);
@@ -107,6 +108,8 @@ io.on('connection', function (socket) {
 
   socket.on("killed", function (data) {
     firstReady = false
+    // console.log("killed")
+    socket.emit("killedSucc", null);
   })
 
 

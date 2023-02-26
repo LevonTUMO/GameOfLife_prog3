@@ -69,13 +69,9 @@
         const urlParams = new URLSearchParams(window.location.search);
         const action = urlParams.get('action')
         // alert(action)
-        if (action == "restart") {
-
-            
+        if (action == "noStart") { 
             setTimeout(() => { start(false); }, 200);
-        } else if (action == "killall") {
-            kill();
-        }
+        } 
 
 
     </script>
