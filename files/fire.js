@@ -12,9 +12,9 @@ module.exports = class Fire extends LivingCreature {
 
 
     eat() {
-        const newCell = random(this.chooseCell(1));
-        const newCell2 = random(this.chooseCell(2));
-        const newCell3 = random(this.chooseCell(4));
+        const newCell = super.random(this.chooseCell(1));
+        const newCell2 = super.random(this.chooseCell(2));
+        const newCell3 = super.random(this.chooseCell(4));
         if (newCell2) {
             var newX = newCell2[0]
             var newY = newCell2[1]
@@ -95,8 +95,8 @@ module.exports = class Fire extends LivingCreature {
 
     move() {
 
-        const newCell = random(this.chooseCell(0));
-        //const newCell2 = random(this.chooseCell(0));
+        const newCell = super.random(this.chooseCell(0));
+        //const newCell2 = super.random(this.chooseCell(0));
         if (newCell) {
             var newX = newCell[0]
             var newY = newCell[1]
@@ -129,21 +129,13 @@ module.exports = class Fire extends LivingCreature {
 
     mulGEat() {
 
-        const newCell = random(this.chooseCell(0));
-        if (newCell && this.energy >= this.mulEnergy && mull <= 100) {
+        const newCell = super.random(this.chooseCell(0));
+        if (newCell && this.energy >= this.mulEnergy) {
             var newX = newCell[0]
             var newY = newCell[1]
             matrix[newY][newX] = 3
             fireArr.push(new Fire(newX, newY, this.energy, this.mulEnergy))
             this.energy = this.defEnergy
-            play++
-            mull++
-            // console.log(play)
-            if (play == this.killer) {
-                killall();
-                play = 0;
-
-            }
         }
     }
 }

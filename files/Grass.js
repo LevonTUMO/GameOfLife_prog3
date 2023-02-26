@@ -1,11 +1,12 @@
-class Grass extends LivingCreature {
+var LivingCreature = require("./live")
+module.exports = class Grass extends LivingCreature {
     constructor(x, y, index) {
         super(x,y,index);
         
     }
 
     mul() {
-        const newCell = random(super.chooseCell(0));
+        const newCell = super.random(super.chooseCell(0));
         if (this.multiplay >= 60 && newCell) {
             const newGrass = new Grass(newCell[0], newCell[1], 1)
             grassArr.push(newGrass)

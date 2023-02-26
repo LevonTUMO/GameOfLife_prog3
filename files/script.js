@@ -1,22 +1,32 @@
 var socket = io();
 var matrix = [];
-var size = 0;
+var first = true;
+const size = 50;
+
+
 function fireЕxtinguisher() {
 	var audio = new Audio('./sound/Blastwave_FX_FireExtinguisher_BW.4175.ogg');
 	audio.play();
-	setTimeout(() => { SendReq(["spawn", [10, 5, size, fireEx, fireExArr]]) }, 300);
+	setTimeout(() => { SendReq("spawn", [10, 5]) }, 300);
 }
 
 function createFire() {
 	var audio = new Audio('./sound/feuer.ogg');
 	audio.play();
-	setTimeout(() => { SendReq(["spawn", [10, 3, size, Fire, fireArr]]) }, 1000);
+	setTimeout(() => { SendReq("spawn", [10, 3]) }, 1000);
 }
+
+function createFireMan() {
+	var audio = new Audio('./sound/feuer.ogg');
+	audio.play();
+	setTimeout(() => { SendReq("spawn", [3, 6]) }, 1000);
+}
+
 
 function pred() {
 	var audio = new Audio('./sound/T-Rex Attack - QuickSounds.com.ogg');
 	audio.play();
-	setTimeout(() => { SendReq(["spawn", [5, 4, size, GrassEaterEater, grassEatEatArr]]) }, 1000);
+	setTimeout(() => { SendReq("spawn", [5, 4]) }, 1000);
 	setTimeout(() => { audio.pause(); }, 5000);
 }
 
@@ -24,7 +34,7 @@ function grass() {
 	var audio = new Audio('./sound/Footsteps-in-grass-moderate-A-www.fesliyanstudios.com.ogg');
 	audio.play();
 	setTimeout(() => {
-		SendReq(["spawn", [100, 1, size, Grass, grassArr]])
+		SendReq("spawn", [100, 1])
 
 	}, 1000);
 
@@ -34,35 +44,26 @@ function grass() {
 function herb() {
 	var audio = new Audio('./sound/Indian Elephant 2 - QuickSounds.com.ogg');
 	audio.play();
-	setTimeout(() => { SendReq(["spawn", [15, 2, size, GrassEater, grassEatArr]]) }, 1000);
+	setTimeout(() => { SendReq("spawn", [15, 2]) }, 1000);
 }
 
 
 function restart() {
 	var audio = new Audio('./sound/cinema-drum-hit-SBA-300419703-preview.ogg');
 	audio.play();
+	SendReq("stop");
 	setTimeout(() => { window.location.replace("./index.html?action=restart") }, 3000);
 }
 function stop() {
 	var audio = new Audio('./sound/cinema-drum-hit-SBA-300419703-preview.ogg');
 	audio.play();
+	SendReq("stop");
 	setTimeout(() => { window.location.replace("./index.html") }, 3000);
 }
 function killFire() {
 	var audio = new Audio('./sound/Blastwave_FX_FireExtinguisher_BW.4175.ogg');
 	audio.play();
-	for (let i = 0; i < 10; i++) {
-		for (var fire in fireArr) {
-			fireArr[fire].die(fireArr)
-		}
-	}
-	console.log("killed fire")
-}
-
-
-
-function SendReq(Req) {
-	socket.emit("send message", Req);
+	SendReq("killfire")
 }
 
 function showbuttons(id) {
@@ -87,8 +88,9 @@ function setkill() {
 
 	var audio = new Audio('./sound/cinema-drum-hit-SBA-300419703-preview.ogg');
 	audio.play();
-	setTimeout(() => { window.location.replace("./index.html?action=killall") }, 3000);
-
+	SendReq("stop")
+	socket.on("nodeLoaded",nodeLoaded)
+	
 }
 
 
@@ -103,9 +105,16 @@ function kill() {
 	showbuttons("kill")
 	showbuttons("killhalf")
 	showbuttons("fireЕxtinguisher")
+	showbuttons("buttonfireMan")
 
 
-	SendReq(["killed"])
+	setTimeout(() => { start(false); }, 200);
+	
+}
+
+function nodeLoaded(){
+	SendReq("killed")
+	setTimeout(() => { window.location.replace("./index.html?action=killall") }, 3000);
 }
 
 function start(playsound) {
@@ -125,27 +134,37 @@ function start(playsound) {
 	showbuttons("kill")
 	showbuttons("killhalf")
 	showbuttons("fireЕxtinguisher")
+	showbuttons("buttonfireMan")
+	SendReq("size", size);
+	letsGo();
+}
 
-	setTimeout(() => {
-		socket.on('display message', GetFromServer);
-	}, 250);
 
 
 
-	function GetFromServer(msg) {
-		console.log(msg);
-		matrix = msg[0][0]
-		size = msg[0][1]
-	}
+function SendReq(Req, data = null) {
+	socket.emit(Req, data);
+}
+
+
+socket.on('matrix', GetMatrix);
+
+function GetMatrix(matr) {
+	matrix = matr
+		drawing();
 }
 
 const side = 10;
-var mull = 0;
-var play = 0;
-function letsGo() {
+
+function setup() {
 	frameRate(120)
 	background("#222222")
+}
+
+function letsGo(){
 	createCanvas(size * side, size * side)
+	SendReq("cliReady");
+	SendReq("newFrame");
 }
 
 
@@ -166,10 +185,14 @@ function drawing() {
 			} else if (matrix[y][x] == 5) {
 				fill("white")
 			}
+			else if (matrix[y][x] == 6) {
+				fill("magenta")
+			}
 			else {
 				fill("#222222")
 			}
 			rect(x * side, y * side, side, side)
 		}
 	}
+	SendReq("newFrame")
 }

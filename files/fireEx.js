@@ -16,7 +16,7 @@ module.exports = class fireEx extends LivingCreature {
 
 
     eat() {
-        const newCell = random(this.chooseCell(3));
+        const newCell = super.random(this.chooseCell(3));
 
 
         if (newCell) {
@@ -25,12 +25,12 @@ module.exports = class fireEx extends LivingCreature {
             matrix[newY][newX] = 5
 
             matrix[this.y][this.x] = 0;
-
+           
             this.x = newX
             this.y = newY
 
             this.energy += 10
-            mull--
+            // mull--
 
             for (var i in fireArr) {
                 if (newX == fireArr[i].x && newY == fireArr[i].y) {
@@ -58,8 +58,8 @@ module.exports = class fireEx extends LivingCreature {
 
     move() {
 
-        const newCell = random(this.chooseCell(1));
-        const newCell2 = random(this.chooseCell(0));
+        const newCell = super.random(this.chooseCell(1));
+        const newCell2 = super.random(this.chooseCell(0));
         if (newCell) {
             var newX = newCell[0]
             var newY = newCell[1]
@@ -93,7 +93,7 @@ module.exports = class fireEx extends LivingCreature {
 
     mulGEat() {
 
-        const newCell = random(this.chooseCell(0));
+        const newCell = super.random(this.chooseCell(0));
         if (newCell && this.energy >= this.mulEnergy) {
             var newX = newCell[0]
             var newY = newCell[1]

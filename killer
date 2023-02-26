@@ -1,0 +1,11 @@
+ps -ef | grep GameOfLife_prog3/server.js
+
+kill id
+
+
+OR 
+
+
+
+
+killall node
