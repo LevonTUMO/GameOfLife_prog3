@@ -87,13 +87,13 @@ io.on('connection', function (socket) {
 
     setTimeout(() => { generatorEat(50, 2, size, GrassEater, grassEatArr) }, 3000);
 
-    setTimeout(() => { generatorEat(25, 4, size, GrassEaterEater, grassEatEatArr) }, 20000);
+    setTimeout(() => { generatorEat(10, 4, size, GrassEaterEater, grassEatEatArr) }, 60000);
 
-    setTimeout(() => { generatorEat(10, 3, size, Fire, fireArr) }, 30000);
+    // setTimeout(() => { generatorEat(10, 3, size, Fire, fireArr) }, 30000);
 
-    setTimeout(() => { generatorEat(60, 5, size, fireEx, fireExArr) }, 50000);
+    // setTimeout(() => { generatorEat(60, 5, size, fireEx, fireExArr) }, 50000);
 
-    setTimeout(() => { generatorEat(25, 4, size, GrassEaterEater, grassEatEatArr) }, 60000);
+    // setTimeout(() => { generatorEat(25, 4, size, GrassEaterEater, grassEatEatArr) }, 60000);
 
     setTimeout(() => { generatorEat(60, 5, size, fireEx, fireExArr) }, 100000);
     firstReady =false

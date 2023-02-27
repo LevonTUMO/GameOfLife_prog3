@@ -7,6 +7,18 @@ module.exports = class LivingCreature {
         this.index = index;
         this.multiplay = 0;
         this.dieEnergy = 0;
+
+        if(Math.floor(Math.random() * 100) % 2 ==0){
+            this.ser="m"
+        }else{
+            this.ser="f"
+        }
+
+        this.mulTime = 0;
+
+        this.liveMulTime = 0;
+
+        
     
 
         this.directions = [

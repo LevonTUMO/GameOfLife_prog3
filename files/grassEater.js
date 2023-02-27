@@ -2,9 +2,10 @@ var LivingCreature = require("./live")
 module.exports = class GrassEater extends LivingCreature {
     constructor(x, y) {
         super(x, y,1);
-        this.energy = 10;
+        this.energy = 30;
         this.mulEnergy = 50;
-        this.defEnergy = 5;
+        this.defEnergy = 20;
+        this.mulTime = 20;
     }
 
     
@@ -81,14 +82,41 @@ module.exports = class GrassEater extends LivingCreature {
 
     mulGEat() {
 
-        const newCell = super.random(this.chooseCell(0));
-        if (newCell && this.energy >= this.mulEnergy) {
+        var newCell = null;
+        var newCell1 = null;
+        const anGrassEater = super.random(this.chooseCell(2));
+        if(anGrassEater && this.energy >= this.mulEnergy){
+            for(var i in grassEatArr){
+                if(grassEatArr[i].x==anGrassEater[0] && grassEatArr[i].y==anGrassEater[1]){
+                    var newGrassEat = grassEatArr[i]
+                }
+            }
+            if(newGrassEat.energy >= newGrassEat.mulEnergy && newGrassEat.ser != this.ser && newGrassEat.mulTime <= newGrassEat.liveMulTime){
+                 newCell = super.random(this.chooseCell(0));
+                 newCell1 = super.random(this.chooseCell(1));
+            }
+        }
+        if (newCell != null) {
             var newX = newCell[0]
             var newY = newCell[1]
             matrix[newY][newX] = 2
             grassEatArr.push(new GrassEater(newX, newY, this.energy, this.mulEnergy))
             this.energy = this.defEnergy
+            this.liveMulTime = this.mulTime;
+            newGrassEat[i].liveMulTime == newGrassEat[i].mulTime
+            newGrassEat.energy = newGrassEat.defEnergy;
 
+        }
+
+        if (newCell1 != null) {
+            var newX = newCell1[0]
+            var newY = newCell1[1]
+            matrix[newY][newX] = 2
+            grassEatArr.push(new GrassEater(newX, newY, this.energy, this.mulEnergy))
+            this.energy = this.defEnergy
+            this.liveMulTime = this.mulTime;
+            newGrassEat[i].liveMulTime == newGrassEat[i].mulTime
+            newGrassEat.energy = newGrassEat.defEnergy;
 
         }
     }

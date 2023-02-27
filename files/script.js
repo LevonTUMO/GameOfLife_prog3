@@ -109,25 +109,6 @@ function setkill() {
 }
 
 
-function kill() {
-	hidebuttons("start")
-	showbuttons("restart")
-	showbuttons("stop")
-	showbuttons("button")
-	showbuttons("button2")
-	showbuttons("buttongrass")
-	showbuttons("buttonfire")
-	showbuttons("kill")
-	showbuttons("killhalf")
-	showbuttons("fireЕxtinguisher")
-	showbuttons("buttonfireMan")
-
-
-	setTimeout(() => { start(false); }, 200);
-	
-}
-
-
 function start(playsound) {
 	if (playsound) {
 
@@ -167,7 +148,7 @@ socket.on('matrix', function(data){
 const side = 10;
 
 function setup() {
-	frameRate(120)
+	frameRate(30)
 	background("#222222")
 }
 
