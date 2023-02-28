@@ -3,6 +3,7 @@ var matrix = [];
 var first = true;
 const size = 50;
 
+const side = 500/size;
 
 function fireЕxtinguisher() {
 	var audio = new Audio('./sound/FireExtinguisher.ogg');
@@ -145,7 +146,6 @@ socket.on('matrix', function(data){
 		drawing();
 });
 
-const side = 10;
 
 function setup() {
 	frameRate(30)
@@ -153,7 +153,7 @@ function setup() {
 }
 
 function letsGo(){
-	createCanvas(size * side, size * side)
+	createCanvas((size * side), size * side)
 	SendReq("cliReady");
 	SendReq("newFrame");
 }
@@ -185,5 +185,10 @@ function drawing() {
 			rect(x * side, y * side, side, side)
 		}
 	}
-	SendReq("newFrame")
+	
+	setTimeout(() => {SendReq("newFrame")},setfps(30));
+}
+
+function setfps(fps){
+	return 1000/fps
 }

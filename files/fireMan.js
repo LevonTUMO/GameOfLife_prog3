@@ -6,7 +6,7 @@ module.exports = class FireMan extends LivingCreature {
         this.energy = 10;
         this.maxenergy = 15;
         this.defEnergy = 5;
-        
+        super.addStatistics("FireMan")
     }
 
     
@@ -27,7 +27,7 @@ module.exports = class FireMan extends LivingCreature {
 
             for (var i in fireManArr) {
                 if (newX == grassEatArr[i].x && newY == grassEatArr[i].y) {
-                    grassEatArr.splice(i, 1)
+                    grassEatArr[i].die(grassEatArr)
                     break;
                 }
             }
@@ -68,7 +68,7 @@ module.exports = class FireMan extends LivingCreature {
 
             for (var i in fireManArr) {
                 if (newX == grassArr[i].x && newY == grassArr[i].y) {
-                    grassArr.splice(i, 1)
+                    grassArr[i].die(grassArr)
                     break;
                 }
             }

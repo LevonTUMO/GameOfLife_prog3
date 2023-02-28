@@ -2,13 +2,15 @@ var LivingCreature = require("./live");
 module.exports = class GrassEaterEater extends LivingCreature {
   constructor(x, y) {
     super(x, y, 1);
-    this.energy = 60;
-    this.mulEnergy = 70;
-    this.defEnergy = 30;
-    this.mulTime = 150;
+    this.energy = 160;
+    this.mulEnergy = 140;
+    this.defEnergy = 150;
+    this.mulTime = 50;
+    super.addStatistics("GrassEaterEater")
   }
 
   eat() {
+    // console.log(this)
     const newCell = super.random(this.chooseCell(2));
     this.liveMulTime++;
     // const newCell1 = super.random(this.chooseCell(1));
@@ -26,7 +28,7 @@ module.exports = class GrassEaterEater extends LivingCreature {
 
       for (var i in grassEatArr) {
         if (newX == grassEatArr[i].x && newY == grassEatArr[i].y) {
-          grassEatArr.splice(i, 1);
+          grassEatArr[i].die(grassEatArr);
           break;
         }
       }
@@ -62,7 +64,6 @@ if(this.energy >= this.mulEnergy){
   move() {
     const newCell = super.random(this.chooseCell(0));
     const newCell2 = super.random(this.chooseCell(1));
-    const newCell3 = super.random(this.chooseCell(4));
 
     if (newCell) {
       var newX = newCell[0];
@@ -85,25 +86,20 @@ if(this.energy >= this.mulEnergy){
       this.x = newX;
       this.y = newY;
 
-      this.energy = this.energy -= 0.25;
-    } else if (newCell3) {
-      var newX = newCell3[0];
-      var newY = newCell3[1];
-      matrix[newY][newX] = 4;
-
-      matrix[this.y][this.x] = 1;
-
-      this.x = newX;
-      this.y = newY;
-
-      this.energy--;
-    }
+      this.energy = this.energy - 0.25;
+    } 
     if (this.energy < this.dieEnergy) {
       this.die(grassEatEatArr);
+    }
+    if(this.energy>= this.mulEnergy){
+      this.mulGEat()
     }
   }
 
   mulGEat() {
+    if(this.ser == 'm'){
+      return;
+  }
     var newCell = null;
     var newCell1 = null;
 
@@ -114,6 +110,7 @@ if(this.energy >= this.mulEnergy){
       this.energy >= this.mulEnergy &&
       this.mulTime <= this.liveMulTime
     ) {
+
       for (var i in grassEatEatArr) {
         if (
           grassEatEatArr[i].x == newEnt[0] &&
@@ -127,11 +124,13 @@ if(this.energy >= this.mulEnergy){
             newCell = super.random(this.chooseCell(0));
             newCell1 = super.random(this.chooseCell(1));
           }
+          break;
         }
       }
     }
 
     if (newCell != null) {
+      console.log("spawned")
       var newX = newCell[0];
       var newY = newCell[1];
       matrix[newY][newX] = 4;
@@ -142,10 +141,9 @@ if(this.energy >= this.mulEnergy){
       this.liveMulTime = this.mulTime;
       grassEatEatArr[i].liveMulTime = grassEatEatArr[i].mulTime
       grassEatEatArr[i].energy = grassEatEatArr[i].defEnergy;
-      if (this.mulEnergy < 200) {
-        this.mulEnergy++;
-      }
+      
     } else if (newCell1 != null) {
+      console.log("spawned")
       var newX = newCell1[0];
       var newY = newCell1[1];
       matrix[newY][newX] = 4;
@@ -156,9 +154,8 @@ if(this.energy >= this.mulEnergy){
       this.liveMulTime = this.mulTime;
       grassEatEatArr[i].liveMulTime == grassEatEatArr[i].mulTime
       grassEatEatArr[i].energy = grassEatEatArr[i].defEnergy;
-      if (this.mulEnergy < 200) {
-        this.mulEnergy++;
-      }
+      console.log("spawned")
+      
     }
   }
 };

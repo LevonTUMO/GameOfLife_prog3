@@ -8,6 +8,7 @@ module.exports = class fireEx extends LivingCreature {
         this.dieEnergy = 50;
         this.play = 0
         this.killer = 0;
+        super.addStatistics("fireEx")
     }
 
 
@@ -34,7 +35,7 @@ module.exports = class fireEx extends LivingCreature {
 
             for (var i in fireArr) {
                 if (newX == fireArr[i].x && newY == fireArr[i].y) {
-                    fireArr.splice(i, 1)
+                    fireArr[i].die(fireArr)
                     break;
                 }
             }

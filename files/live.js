@@ -1,3 +1,4 @@
+var fs = require('fs');
 module.exports = class LivingCreature {
 
     constructor(x, y, index) {
@@ -5,7 +6,7 @@ module.exports = class LivingCreature {
         this.x = x;
         this.y = y;
         this.index = index;
-        this.multiplay = 0;
+        
         this.dieEnergy = 0;
 
         if(Math.floor(Math.random() * 100) % 2 ==0){
@@ -73,12 +74,28 @@ module.exports = class LivingCreature {
     die(arr) {
         for (var i in arr) {
             if (this.x == arr[i].x && this.y == arr[i].y) {
+                delete arr[i];
                 arr.splice(i, 1)
+                
                 break;
             }
 
         }
         matrix[this.y][this.x] = 0
+        // console.log("die")
+    }
+
+
+
+    addStatistics(who,howmany=1){
+        var json = null;
+        json = fs.readFileSync("statistics.json")
+        var jsonArr = JSON.parse(json)
+        jsonArr[who] = jsonArr[who]+howmany
+        jsonArr["all"] = jsonArr["all"]+howmany
+        var JsonString = JSON.stringify(jsonArr, null, 4);
+
+        fs.writeFileSync("statistics.json", JsonString);
     }
 
 }

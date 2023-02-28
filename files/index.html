@@ -70,9 +70,30 @@
         const action = urlParams.get('action')
         // alert(action)
         if (action == "noStart") { 
-            setTimeout(() => { start(false); }, 200);
+            // while (typeof createCanvas !== 'function') {
+                
+            // }
+            noStartAction()
+            
+            // while(typeof createCanvas != "function"){
+            //     console.log(typeof createCanvas )
+            // }
+
+            // setTimeout(() => {  }, 200);
+            
         } 
 
+        function noStartAction(){
+                if(typeof createCanvas == "function"){
+                    // console.log(typeof createCanvas )
+                    start(false);
+                    
+                }
+                else{
+                    // console.log(typeof createCanvas )
+                    setTimeout(noStartAction, 10);
+                }
+        }
 
     </script>
 
