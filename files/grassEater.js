@@ -3,9 +3,9 @@ module.exports = class GrassEater extends LivingCreature {
     constructor(x, y) {
         super(x, y, 1);
         this.energy = 20;
-        this.mulEnergy = 70;
+        this.mulEnergy = 50;
         this.defEnergy = 10;
-        this.mulTime = 30;
+        this.mulTime = 20;
         super.addStatistics("GrassEater")
     }
 

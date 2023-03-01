@@ -10,7 +10,7 @@
     <script src="/socket.io/socket.io.js"></script>
 </head>
 
-<body>
+<body id ="body">
 
     <h1 class="glitch">
         <span aria-hidden="true">Game of life</span>
@@ -42,6 +42,12 @@
             <td><button id="kill" class="kill" onclick="setkill()">destroy everything</button></td>
 
             <td><button id="killhalf" class="killhalf" onclick="killFire()">put out the fire</button></td>
+            <td><select id="weather" class="weather">
+                <option value="Summer">Summer</option>
+                <option value="Autumn">Autumn</option>
+                <option value="Winter">Winter</option>
+                <option value="Spring">Spring</option>
+            </select></td>
         </tr>
 
     </table>
@@ -50,7 +56,36 @@
 
 
 
-
+    <table>
+        <tr>
+            <td>Grass</td>        
+            <td id = "GrassVal"></td>     
+        </tr>
+        <tr>
+            <td>GrassEater</td>        
+            <td id = "GrassEaterVal"></td>     
+        </tr>
+        <tr>
+            <td>GrassEaterEater   </td>        
+            <td id = "GrassEaterEaterVal"></td>     
+        </tr>
+        <tr>
+            <td>FireMan</td>        
+            <td id = "FireManVal"></td>     
+        </tr>
+        <tr>
+            <td>fireEx</td>        
+            <td id = "fireExVal"></td>     
+        </tr>
+        <tr>
+            <td>Fire</td>        
+            <td id = "FireVal"></td>     
+        </tr>
+        <tr>
+            <td>all</td>        
+            <td id = "allVal"></td>     
+        </tr>
+    </table>
 
 
 

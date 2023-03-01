@@ -5,7 +5,7 @@ module.exports = class GrassEaterEater extends LivingCreature {
     this.energy = 160;
     this.mulEnergy = 140;
     this.defEnergy = 150;
-    this.mulTime = 50;
+    this.mulTime = 20;
     super.addStatistics("GrassEaterEater")
   }
 
@@ -17,18 +17,19 @@ module.exports = class GrassEaterEater extends LivingCreature {
     if (newCell) {
       var newX = newCell[0];
       var newY = newCell[1];
-      matrix[newY][newX] = 4;
-
-      matrix[this.y][this.x] = 0;
-
-      this.x = newX;
-      this.y = newY;
-
-      this.energy++;
+      
 
       for (var i in grassEatArr) {
         if (newX == grassEatArr[i].x && newY == grassEatArr[i].y) {
           grassEatArr[i].die(grassEatArr);
+          matrix[newY][newX] = 4;
+
+          matrix[this.y][this.x] = 0;
+
+          this.x = newX;
+          this.y = newY;
+
+          this.energy++;
           break;
         }
       }
@@ -79,14 +80,24 @@ if(this.energy >= this.mulEnergy){
     } else if (newCell2) {
       var newX = newCell2[0];
       var newY = newCell2[1];
-      matrix[newY][newX] = 4;
 
-      matrix[this.y][this.x] = 1;
+      for(var i in grassArr){
+        if(grassArr[i].x == newX && grassArr[i].y == newY){
+          grassArr[i].die(grassArr)
+          matrix[newY][newX] = 4;
 
-      this.x = newX;
-      this.y = newY;
+          matrix[this.y][this.x] = 0;
+    
+          this.x = newX;
+          this.y = newY;
 
-      this.energy = this.energy - 0.25;
+          this.energy = this.energy - 0.25;
+          break
+        }
+      }
+  
+
+      
     } 
     if (this.energy < this.dieEnergy) {
       this.die(grassEatEatArr);
@@ -130,7 +141,7 @@ if(this.energy >= this.mulEnergy){
     }
 
     if (newCell != null) {
-      console.log("spawned")
+      // console.log("spawned")
       var newX = newCell[0];
       var newY = newCell[1];
       matrix[newY][newX] = 4;
@@ -143,7 +154,7 @@ if(this.energy >= this.mulEnergy){
       grassEatEatArr[i].energy = grassEatEatArr[i].defEnergy;
       
     } else if (newCell1 != null) {
-      console.log("spawned")
+      // console.log("spawned")
       var newX = newCell1[0];
       var newY = newCell1[1];
       matrix[newY][newX] = 4;
@@ -154,7 +165,7 @@ if(this.energy >= this.mulEnergy){
       this.liveMulTime = this.mulTime;
       grassEatEatArr[i].liveMulTime == grassEatEatArr[i].mulTime
       grassEatEatArr[i].energy = grassEatEatArr[i].defEnergy;
-      console.log("spawned")
+      // console.log("spawned")
       
     }
   }

@@ -113,7 +113,7 @@ const fireEx = require("./files/fireEx");
 const Grass = require("./files/Grass");
 const GrassEater = require("./files/grassEater");
 const GrassEaterEater = require("./files/grassEaterEater");
-
+updateFileData();
 io.on('connection', function (socket) {
   socket.emit("nodeLoaded", true);
   // console.log("nodeLoaded")
@@ -125,7 +125,7 @@ io.on('connection', function (socket) {
   socket.on("size", function (data) {
     size = data;
     generator(size)
-    updateFileData();
+    
     sendMatrix()
   });
   socket.on("cliReady", function (data) {
@@ -149,12 +149,24 @@ io.on('connection', function (socket) {
     }
 
     });
-
+var mCOunt = 1;
   socket.on("newFrame", function (data) {
+   if(mCOunt == 1){
+    mCOunt++
     sendMatrix();
     onframe();
+   }else{
+    sendMatrix();
+    mCOunt--
+   }
+    
+  
+    
   })
-
+  socket.on("retMatrix",function(){
+    sendMatrix();
+    
+  })
   socket.on("killed", function (data) {
     firstReady = false
     // console.log("killed")
@@ -163,6 +175,7 @@ io.on('connection', function (socket) {
 
 
   function onframe() {
+    // console.log("onFrame")
     for (let gr in grassArr) {
       grassArr[gr].mul()
     }
@@ -181,7 +194,7 @@ io.on('connection', function (socket) {
     for (var fireMan in fireManArr) {
       fireManArr[fireMan].eat()
     }
-
+    sendFileData(socket);
     // console.log(grassEatArr.length)
     
   }
@@ -229,6 +242,9 @@ process.exit();
 	}
 
 })
+
+
+
 })
 
 
@@ -246,4 +262,12 @@ function updateFileData(){
 var JsonString = JSON.stringify(jsonArr, null, 4);
 
 fs.writeFileSync("statistics.json", JsonString);
+}
+
+function sendFileData(socket){
+  var json = null;
+  json = fs.readFileSync("statistics.json")
+  var jsonArr = JSON.parse(json)
+
+  socket.emit("stats", jsonArr);
 }

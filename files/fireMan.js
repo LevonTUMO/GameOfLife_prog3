@@ -57,21 +57,23 @@ module.exports = class FireMan extends LivingCreature {
         } else if (newCell2) {
             var newX = newCell2[0]
             var newY = newCell2[1]
-            matrix[newY][newX] = 6
-
-            fireExArr.push(new fireEx(this.x,this.y));
-
-            this.x = newX
-            this.y = newY
-
-            this.energy--
-
-            for (var i in fireManArr) {
-                if (newX == grassArr[i].x && newY == grassArr[i].y) {
+            for(var i in grassArr){
+                if(grassArr[i].x == newX && grassArr[i].y == newY){
                     grassArr[i].die(grassArr)
-                    break;
+                    matrix[newY][newX] = 6
+
+                    fireExArr.push(new fireEx(this.x,this.y));
+
+                    this.x = newX
+                    this.y = newY
+
+                    this.energy--
+                    break
                 }
             }
+            
+
+            
         }
         if (this.energy < this.dieEnergy) {
             this.die(fireManArr)

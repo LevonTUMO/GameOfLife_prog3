@@ -129,6 +129,7 @@ function start(playsound) {
 	showbuttons("killhalf")
 	showbuttons("fireЕxtinguisher")
 	showbuttons("buttonfireMan")
+	showbuttons("weather")
 	SendReq("size", size);
 	letsGo();
 }
@@ -140,10 +141,22 @@ function SendReq(Req, data = null) {
 	socket.emit(Req, data);
 }
 
-
+var got = false
 socket.on('matrix', function(data){
+	if(!got){
 	matrix = data
+	// console.log("matrix!!")
+	got = true
+	
 		drawing();
+	
+	}else{
+		got = false
+		SendReq("retMatrix")
+	}
+	
+	
+		
 });
 
 
@@ -164,23 +177,23 @@ function drawing() {
 	for (let y = 0; y < matrix.length; y++) {
 		for (let x = 0; x < matrix[y].length; x++) {
 			if (matrix[y][x] == 1) {
-				fill("green")
+				fill(getColorForWeather(1))
 			} else if (matrix[y][x] == 2) {
-				fill("yellow")
+				fill(getColorForWeather(2))
 
 
 			} else if (matrix[y][x] == 3) {
-				fill("orange")
+				fill(getColorForWeather(3))
 			} else if (matrix[y][x] == 4) {
-				fill("red")
+				fill(getColorForWeather(4))
 			} else if (matrix[y][x] == 5) {
-				fill("white")
+				fill(getColorForWeather(5))
 			}
 			else if (matrix[y][x] == 6) {
-				fill("magenta")
+				fill(getColorForWeather(6))
 			}
 			else {
-				fill("#222222")
+				fill(getColorForWeather(0))
 			}
 			rect(x * side, y * side, side, side)
 		}
@@ -189,6 +202,116 @@ function drawing() {
 	setTimeout(() => {SendReq("newFrame")},setfps(30));
 }
 
+function getColorForWeather(id){
+	var weather = document.getElementById("weather").value;
+	var colorID = null
+		if(weather=="Summer"){
+			colorID =0
+		document.getElementById("button").style.backgroundColor = getcolors(2)[colorID]
+		document.getElementById("button2").style.backgroundColor = getcolors(4)[colorID]
+		document.getElementById("buttongrass").style.backgroundColor = getcolors(1)[colorID]
+		document.getElementById("buttonfire").style.backgroundColor = getcolors(3)[colorID]
+		document.getElementById("buttonfireMan").style.backgroundColor = getcolors(6)[colorID]
+		document.getElementById("fireЕxtinguisher").style.backgroundColor = getcolors(5)[colorID]
+
+		document.getElementById("body").style.backgroundColor = getcolors(0)[colorID]
+
+
+		return getcolors(id)[colorID]
+	}
+	if(weather=="Autumn"){
+		colorID =1
+		document.getElementById("button").style.backgroundColor = getcolors(2)[colorID]
+		document.getElementById("button2").style.backgroundColor = getcolors(4)[colorID]
+		document.getElementById("buttongrass").style.backgroundColor = getcolors(1)[colorID]
+		document.getElementById("buttonfire").style.backgroundColor = getcolors(3)[colorID]
+		document.getElementById("buttonfireMan").style.backgroundColor = getcolors(6)[colorID]
+		document.getElementById("fireЕxtinguisher").style.backgroundColor = getcolors(5)[colorID]
+
+		document.getElementById("body").style.backgroundColor = getcolors(0)[colorID]
+
+		return getcolors(id)[colorID]
+	}
+	if(weather=="Winter"){
+		colorID =2
+		document.getElementById("button").style.backgroundColor = getcolors(2)[colorID]
+		document.getElementById("button2").style.backgroundColor = getcolors(4)[colorID]
+		document.getElementById("buttongrass").style.backgroundColor = getcolors(1)[colorID]
+		document.getElementById("buttonfire").style.backgroundColor = getcolors(3)[colorID]
+		document.getElementById("buttonfireMan").style.backgroundColor = getcolors(6)[colorID]
+		document.getElementById("fireЕxtinguisher").style.backgroundColor = getcolors(5)[colorID]
+		document.getElementById("body").style.backgroundColor = getcolors(0)[colorID]
+
+		return getcolors(id)[colorID]
+	}
+	if(weather=="Spring"){
+		colorID =3
+		document.getElementById("button").style.backgroundColor = getcolors(2)[colorID]
+		document.getElementById("button2").style.backgroundColor = getcolors(4)[colorID]
+		document.getElementById("buttongrass").style.backgroundColor = getcolors(1)[colorID]
+		document.getElementById("buttonfire").style.backgroundColor = getcolors(3)[colorID]
+		document.getElementById("buttonfireMan").style.backgroundColor = getcolors(6)[colorID]
+		document.getElementById("fireЕxtinguisher").style.backgroundColor = getcolors(5)[colorID]
+		
+		document.getElementById("body").style.backgroundColor = getcolors(0)[colorID]
+
+		return getcolors(id)[colorID]
+	}
+}
+
+function getcolors(id){
+	var zero = ["#222222","#454545","#808080","#333333"]
+	var one = ["#10A702","#99CC32","#87C27D","#21E004"]
+	var two = ["yellow","#EEC900","#FBEC5D","#D4D420"]
+	var three = ["orange","orange","orange","orange"]
+	var four = ["red","#7A0606","#EE8787","#F0273A"]
+	var five = ["white","white","#D2C9CA","white"]
+	var six = ["magenta","#A0086B","#FF00FF	","#AA3581"]
+
+	if(id == 0){
+		return zero
+	}
+	if(id == 1){
+		return one
+	}
+	if(id == 2){
+		return two
+	}
+	if(id == 3){
+		return three
+	}
+	if(id == 4){
+		return four
+	}
+	if(id == 5){
+		return five
+	}
+	if(id == 6){
+		return six
+	}
+
+}
+
 function setfps(fps){
 	return 1000/fps
 }
+
+
+socket.on("stats",function(data){
+	let GrassVal = document.getElementById("GrassVal")
+	let GrassEaterVal = document.getElementById("GrassEaterVal")
+	let GrassEaterEaterVal = document.getElementById("GrassEaterEaterVal")
+	let FireManVal = document.getElementById("FireManVal")
+	let fireExVal = document.getElementById("fireExVal")
+	let FireVal = document.getElementById("FireVal")
+	let allVal = document.getElementById("allVal")
+
+	GrassVal.innerHTML = data["Grass"]
+	GrassEaterVal.innerHTML = data["GrassEater"]
+	GrassEaterEaterVal.innerHTML = data["GrassEaterEater"]
+	FireManVal.innerHTML = data["FireMan"]
+	fireExVal.innerHTML = data["fireEx"]
+	FireVal.innerHTML = data["Fire"]
+	allVal.innerHTML = data["all"]
+
+})

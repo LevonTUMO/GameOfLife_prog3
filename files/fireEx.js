@@ -64,14 +64,22 @@ module.exports = class fireEx extends LivingCreature {
         if (newCell) {
             var newX = newCell[0]
             var newY = newCell[1]
-            matrix[newY][newX] = 5
+            for(var i in grassArr){
+                if(grassArr[i].x==newX&&grassArr[i].y==newY){
+                    grassArr[i].die(grassArr);
 
-            matrix[this.y][this.x] = 1;
+                    matrix[newY][newX] = 5
 
-            this.x = newX
-            this.y = newY
+                    matrix[this.y][this.x] = 0;
 
-            this.play++
+                    this.x = newX
+                    this.y = newY
+
+                    this.play++
+                    break
+                }
+            }
+            
         } else if (newCell2) {
             var newX = newCell2[0]
             var newY = newCell2[1]
