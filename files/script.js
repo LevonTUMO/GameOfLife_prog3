@@ -330,6 +330,22 @@ socket.on("stats",function(data){
 	let FireVal = document.getElementById("FireVal")
 	let allVal = document.getElementById("allVal")
 
+	let GrassValLive = document.getElementById("GrassValLive")
+	let GrassEaterValLive = document.getElementById("GrassEaterValLive")
+	let GrassEaterEaterValLive = document.getElementById("GrassEaterEaterValLive")
+	let FireManValLive = document.getElementById("FireManValLive")
+	let fireExValLive = document.getElementById("fireExValLive")
+	let FireValLive = document.getElementById("FireValLive")
+	let allValLive = document.getElementById("allValLive")
+
+	GrassValLive.innerHTML = data["GrassLive"]
+	GrassEaterValLive.innerHTML = data["GrassEaterLive"]
+	GrassEaterEaterValLive.innerHTML = data["GrassEaterEaterLive"]
+	FireManValLive.innerHTML = data["FireManLive"]
+	fireExValLive.innerHTML = data["fireExLive"]
+	FireValLive.innerHTML = data["FireLive"]
+	allValLive.innerHTML = data["allLive"]
+
 	GrassVal.innerHTML = data["Grass"]
 	GrassEaterVal.innerHTML = data["GrassEater"]
 	GrassEaterEaterVal.innerHTML = data["GrassEaterEater"]

@@ -72,8 +72,10 @@ module.exports = class LivingCreature {
     }
 
     die(arr) {
+    
         for (var i in arr) {
             if (this.x == arr[i].x && this.y == arr[i].y) {
+                this.addStatistics(arr[i].constructor.name,-1,true)
                 delete arr[i];
                 arr.splice(i, 1)
                 
@@ -87,12 +89,17 @@ module.exports = class LivingCreature {
 
 
 
-    addStatistics(who,howmany=1){
+    addStatistics(who,howmany=1,live=false){
         var json = null;
         json = fs.readFileSync("statistics.json")
         var jsonArr = JSON.parse(json)
-        jsonArr[who] = jsonArr[who]+howmany
-        jsonArr["all"] = jsonArr["all"]+howmany
+        if(!live){
+            jsonArr[who] = jsonArr[who]+howmany
+            jsonArr["all"] = jsonArr["all"]+howmany
+        }
+
+        jsonArr[who+"Live"] = jsonArr[who+"Live"]+howmany
+        jsonArr["allLive"] = jsonArr["allLive"]+howmany
         var JsonString = JSON.stringify(jsonArr, null, 4);
 
         fs.writeFileSync("statistics.json", JsonString);

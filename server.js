@@ -386,7 +386,14 @@ function updateFileData(){
   "FireMan": 0,
   "fireEx": 0,
   "Fire": 0,
-  "all": 0
+  "all": 0,
+  "GrassLive": 0,
+  "GrassEaterLive": 0,
+  "GrassEaterEaterLive": 0,
+  "FireManLive": 0,
+  "fireExLive": 0,
+  "FireLive": 0,
+  "allLive": 0
 }
 var JsonString = JSON.stringify(jsonArr, null, 4);
 
