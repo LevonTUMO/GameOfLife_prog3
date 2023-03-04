@@ -1,4 +1,4 @@
-ps -ef | grep GameOfLife_prog3/server.js
+µ
 
 kill id
 

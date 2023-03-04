@@ -151,6 +151,10 @@ io.on('connection', function (socket) {
     });
 var mCOunt = 1;
   socket.on("newFrame", function (data) {
+    
+    WetherImpact(data)
+
+
    if(mCOunt == 1){
     mCOunt++
     sendMatrix();
@@ -163,6 +167,131 @@ var mCOunt = 1;
   
     
   })
+
+  function WetherImpact(data){
+    for(var i in grassArr){
+      if(grassArr[i].mulTime != getSpeed(1,data)){
+        // console.log(true)
+        grassArr[i].mulTime = getSpeed(1,data);
+      }
+    }
+    for(var i in grassEatArr){
+      if(grassEatArr[i].mulTime != getSpeed(2,data)){
+        grassEatArr[i].mulTime = getSpeed(2,data);
+      }
+    }
+    for(var i in grassEatEatArr){
+      if(grassEatEatArr[i].mulTime != getSpeed(4,data)){
+        grassEatEatArr[i].mulTime = getSpeed(4,data);
+      }
+    }
+    // for(var i in fireArr){
+    //   if(fireArr[i].play != getSpeed(3,data)){
+    //     fireArr[i].play += getSpeed(3);
+    //   }
+    // }
+    // for(var i in fireExArr){
+    //   if(fireExArr[i].play != getSpeed(5,data)){
+    //     fireExArr[i].play += getSpeed(5);
+    //   }
+    // }
+    // for(var i in fireManArr){
+    //   if(fireManArr[i].energy != getSpeed(6,data)){
+    //     fireManArr[i].energy += getSpeed(6);
+    //   }
+    // }
+  }
+
+  function getSpeed(id,data){
+    if(id == 1){
+      if(data == "Summer"){
+        return 10;
+      }
+      if(data == "Autumn"){
+        return 15;
+      }
+      if(data == "Winter"){
+        return 20;
+      }
+      if(data == "Spring"){
+        return 12;
+      }
+    }
+
+    if(id == 2){
+      if(data == "Summer"){
+        return 20;
+      }
+      if(data == "Autumn"){
+        return 25;
+      }
+      if(data == "Winter"){
+        return 30;
+      }
+      if(data == "Spring"){
+        return 22;
+      }
+    }
+
+    // if(id == 3){
+    //   if(data == "Summer"){
+    //     return 0;
+    //   }
+    //   if(data == "Autumn"){
+    //     return 5;
+    //   }
+    //   if(data == "Winter"){
+    //     return 55;
+    //   }
+    //   if(data == "Spring"){
+    //     return 10;
+    //   }
+    // }
+
+    if(id == 4){
+      if(data == "Summer"){
+        return 20;
+      }
+      if(data == "Autumn"){
+        return 25;
+      }
+      if(data == "Winter"){
+        return 30;
+      }
+      if(data == "Spring"){
+        return 22;
+      }
+    }
+    // if(id == 5){
+    //   if(data == "Summer"){
+    //     return 0;
+    //   }
+    //   if(data == "Autumn"){
+    //     return 5;
+    //   }
+    //   if(data == "Winter"){
+    //     return 55;
+    //   }
+    //   if(data == "Spring"){
+    //     return 10;
+    //   }
+    // }
+    // if(id == 6){
+    //   if(data == "Summer"){
+    //     return 10;
+    //   }
+    //   if(data == "Autumn"){
+    //     return 5;
+    //   }
+    //   if(data == "Winter"){
+    //     return 2;
+    //   }
+    //   if(data == "Spring"){
+    //     return 8;
+    //   }
+    // }
+  }
+
   socket.on("retMatrix",function(){
     sendMatrix();
     

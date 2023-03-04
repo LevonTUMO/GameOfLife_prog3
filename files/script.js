@@ -119,6 +119,7 @@ function start(playsound) {
 	// SendReq("console.log","start")
 
 	hidebuttons("start")
+	showbuttons("stats")
 	showbuttons("restart")
 	showbuttons("stop")
 	showbuttons("button")
@@ -171,9 +172,10 @@ function letsGo(){
 	SendReq("newFrame");
 }
 
-
+// var badafs = 0;
 function drawing() {
-
+	// console.error(new Error("drawing is not defined ("+badafs+")"))
+	// badafs++
 	for (let y = 0; y < matrix.length; y++) {
 		for (let x = 0; x < matrix[y].length; x++) {
 			if (matrix[y][x] == 1) {
@@ -199,11 +201,14 @@ function drawing() {
 		}
 	}
 	
-	setTimeout(() => {SendReq("newFrame")},setfps(30));
+	setTimeout(() => {SendReq("newFrame",getWeather())},setfps(30));
 }
-
-function getColorForWeather(id){
+function getWeather(){
 	var weather = document.getElementById("weather").value;
+	return weather;
+}
+function getColorForWeather(id){
+	var weather = getWeather();
 	var colorID = null
 		if(weather=="Summer"){
 			colorID =0
@@ -213,6 +218,11 @@ function getColorForWeather(id){
 		document.getElementById("buttonfire").style.backgroundColor = getcolors(3)[colorID]
 		document.getElementById("buttonfireMan").style.backgroundColor = getcolors(6)[colorID]
 		document.getElementById("fireЕxtinguisher").style.backgroundColor = getcolors(5)[colorID]
+
+		document.getElementById("button").innerHTML = "herbivorous (MulSpeed: "+10+")"
+		document.getElementById("button2").innerHTML = "predator (MulSpeed: "+20+")"
+		document.getElementById("buttongrass").innerHTML = "Grass (MulSpeed: "+20+")"
+	
 
 		document.getElementById("body").style.backgroundColor = getcolors(0)[colorID]
 
@@ -228,6 +238,10 @@ function getColorForWeather(id){
 		document.getElementById("buttonfireMan").style.backgroundColor = getcolors(6)[colorID]
 		document.getElementById("fireЕxtinguisher").style.backgroundColor = getcolors(5)[colorID]
 
+		document.getElementById("button").innerHTML = "herbivorous (MulSpeed: "+15+")"
+		document.getElementById("button2").innerHTML = "predator (MulSpeed: "+25+")"
+		document.getElementById("buttongrass").innerHTML = "Grass (MulSpeed: "+25+")"
+
 		document.getElementById("body").style.backgroundColor = getcolors(0)[colorID]
 
 		return getcolors(id)[colorID]
@@ -240,6 +254,11 @@ function getColorForWeather(id){
 		document.getElementById("buttonfire").style.backgroundColor = getcolors(3)[colorID]
 		document.getElementById("buttonfireMan").style.backgroundColor = getcolors(6)[colorID]
 		document.getElementById("fireЕxtinguisher").style.backgroundColor = getcolors(5)[colorID]
+
+		document.getElementById("button").innerHTML = "herbivorous (MulSpeed: "+20+")"
+		document.getElementById("button2").innerHTML = "predator (MulSpeed: "+30+")"
+		document.getElementById("buttongrass").innerHTML = "Grass (MulSpeed: "+30+")"
+
 		document.getElementById("body").style.backgroundColor = getcolors(0)[colorID]
 
 		return getcolors(id)[colorID]
@@ -252,6 +271,11 @@ function getColorForWeather(id){
 		document.getElementById("buttonfire").style.backgroundColor = getcolors(3)[colorID]
 		document.getElementById("buttonfireMan").style.backgroundColor = getcolors(6)[colorID]
 		document.getElementById("fireЕxtinguisher").style.backgroundColor = getcolors(5)[colorID]
+
+
+		document.getElementById("button").innerHTML = "herbivorous (MulSpeed: "+12+")"
+		document.getElementById("button2").innerHTML = "predator (MulSpeed: "+22+")"
+		document.getElementById("buttongrass").innerHTML = "Grass (MulSpeed: "+22+")"
 		
 		document.getElementById("body").style.backgroundColor = getcolors(0)[colorID]
 
